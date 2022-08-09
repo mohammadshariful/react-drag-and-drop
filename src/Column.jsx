@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
+import ResizePanel from "react-resize-panel";
 import Component from "./Component";
 import { COLUMN } from "./constants";
 import DropZone from "./DropZone";
-
 const style = {};
 const Column = ({ data, components, handleDrop, path }) => {
   const ref = useRef(null);
@@ -35,37 +35,39 @@ const Column = ({ data, components, handleDrop, path }) => {
   };
 
   return (
-    <div
-      ref={ref}
-      style={{ ...style, opacity }}
-      className="base draggable column"
-    >
-      {data.id}
-      {data.children.map((component, index) => {
-        const currentPath = `${path}-${index}`;
+    <ResizePanel direction="e">
+      <div
+        ref={ref}
+        style={{ ...style, opacity }}
+        className="base draggable column"
+      >
+        {data.id}
+        {data.children.map((component, index) => {
+          const currentPath = `${path}-${index}`;
 
-        return (
-          <React.Fragment key={component.id}>
-            <DropZone
-              data={{
-                path: currentPath,
-                childrenCount: data.children.length,
-              }}
-              onDrop={handleDrop}
-            />
-            {renderComponent(component, currentPath)}
-          </React.Fragment>
-        );
-      })}
-      <DropZone
-        data={{
-          path: `${path}-${data.children.length}`,
-          childrenCount: data.children.length,
-        }}
-        onDrop={handleDrop}
-        isLast
-      />
-    </div>
+          return (
+            <React.Fragment key={component.id}>
+              <DropZone
+                data={{
+                  path: currentPath,
+                  childrenCount: data.children.length,
+                }}
+                onDrop={handleDrop}
+              />
+              {renderComponent(component, currentPath)}
+            </React.Fragment>
+          );
+        })}
+        <DropZone
+          data={{
+            path: `${path}-${data.children.length}`,
+            childrenCount: data.children.length,
+          }}
+          onDrop={handleDrop}
+          isLast
+        />
+      </div>
+    </ResizePanel>
   );
 };
 export default Column;

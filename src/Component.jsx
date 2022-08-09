@@ -31,7 +31,7 @@ const Component = ({ data, components, path }) => {
         onClick={onOpenModal}
         ref={ref}
         style={{ ...style, opacity }}
-        className="component draggable"
+        className="component draggable "
       >
         <div>{data.id}</div>
         <div>{component.content}</div>
