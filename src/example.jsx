@@ -14,6 +14,7 @@ import TrashDropZone from "./TrashDropZone";
 
 import shortid from "shortid";
 import { COLUMN, COMPONENT, SIDEBAR_ITEM, SIDEBAR_ITEMS } from "./constants";
+import TextAreaData from "./TextAreaData";
 
 const Container = () => {
   const initialLayout = initialData.layout;
@@ -161,6 +162,7 @@ const Container = () => {
           }}
           onDrop={handleDropToTrashBin}
         />
+        <TextAreaData />
       </div>
     </div>
   );
